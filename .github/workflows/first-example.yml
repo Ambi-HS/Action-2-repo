@@ -12,5 +12,5 @@ jobs:
         - name: list file
           run: ls
 
-        - name: read files
-          run: cat README.md
+       # - name: read files
+        #  run: cat README.md
