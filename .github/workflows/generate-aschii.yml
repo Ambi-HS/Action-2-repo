@@ -8,20 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: checkou repo
+    - name: checkout repo
       uses: actions/checkout@v4
 
-    - name: instal cowsay program
-      run: sudo apt-get install cowsay -y
-
-    - name: excute cowsay cmd
-      run: cowsay -f dragon "dragon for cover, I am a dragon....rawr" >> dragon.txt
-
-    - name: test file exists
-      run: grep -i "dragon" dragon.txt
-
-    - name: read fiel 
-      run: cat dragon.txt
-    
     - name: list repo files
       run: ls -ltra
+
+    - name: excuting shell script
+      run: ./ascii-scrpit.sh
+
+    
+   
