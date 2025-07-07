@@ -31,7 +31,7 @@ jobs:
        # path: dragon.txt
 
     - name: test file exists
-      run: grep -i "dragon.txt"
+      run: grep -i "dragon" dragon.txt
 
   deploy_job_3: 
     needs: test_job_2
