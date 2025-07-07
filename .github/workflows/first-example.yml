@@ -21,7 +21,7 @@ jobs:
 
 
        # - name: list file
-       #   run: ls
+       #   ,rrun: ls
 
        # - name: read files
        #   run: cat README.md
