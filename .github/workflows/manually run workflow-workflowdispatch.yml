@@ -4,48 +4,26 @@ on:
     workflow_dispatch:
   
 
-jobs:
-  build_job_1:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Instal cowsay program
-      run: sudo apt-get install cowsay -y
+jobs: 
+    first-job:
+        runs-on: ubuntu-latest
+        steps:
+        - name: checkout repo
+          uses: actions/checkout@v4
 
-    - name: excute cowsay cmd
-      run: cowsay -f dragon "dragon for cover, I am a dragon....rawr" >> dragon.txt
-      
-    - name: Upload dragon text file.
-      uses: actions/upload-artifact@v4
-      with:
-        name: Dragon-text-fiels
-        path: dragon.txt
-      
+        - name: List and Read file
+          run: |
+            echo "this is my first github actions job"
+            ls -ltra
+            cat README.md
 
-  test_job_2:
-    needs: build_job_1
-    runs-on: ubuntu-latest
-    steps:
-    - name: Upload dragon text file.
-      uses: actions/download-artifact@v4
-      with:
-        name: Dragon-text-fiels
-       # path: dragon.txt
+        - name: Generate a ASCII artwork
+          run: cowsay -f dragon "run for cover, i am a dragon......RAWR" >>dragon.txt
 
-    - name: test file exists
-      run: grep -i "dragon" dragon.txt
 
-  deploy_job_3: 
-    needs: [test_job_2]
-    runs-on: ubuntu-latest
-    steps:
-    - name: download dragon text file.
-      uses: actions/download-artifact@v4
-      with:
-        name: Dragon-text-fiels
 
-    - name: read fiel
-      run: cat dragon.txt
+       # - name: list file
+       #   ,rrun: ls
 
-    - name: deploy
-      run: echo displaying.....
-  
+       # - name: read files
+       #   run: cat README.md
