@@ -1,29 +1,35 @@
-name: Generate a Ascii workflow
+name: environments variable and scecrets in step level
 
 on:
     workflow_dispatch:
-  
+env: 
+        CONTAINER_REGISTRY: docker.io
+        #DOCKER_USERNAME: Ambikahs  we are comminting this bcz we defined in environment variables in repo
+        IMAGE_NAME: github-actions-nginx
 
-jobs: 
-    first-job:
-        runs-on: ubuntu-latest
-        steps:
-        - name: checkout repo
-          uses: actions/checkout@v4
+jobs:
+ docker:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Docker Build
+      run: echo docker build -t $CONTAINER_REGISTRY/${{ vars.DOCKER_USERNAME}}/$IMAGE_NAME:latest
+     # or 
+     # run: echo docker build -t ${{env.CONTAINER_REGISTRY}}/${{env.DOCKER_USERNAME}}
+     #adding saved environmet variables from repo level ${{ vars.DOCKER_USERNAME}}
 
-        - name: List and Read file
-          run: |
-            echo "this is my first github actions job"
-            ls -ltra
-            cat README.md
+    - name: Docker login
+      run: echo Docker login --username=${{ vars.DOCKER_USERNAME}} --password=${{secrets.DOCKER_PASSWORD}}
+       # adding repository scecrets
+    - name: Docker pusblish
+      run: echo docker push $CONTAINER_REGISTRY/${{ vars.DOCKER_USERNAME}}/$IMAGE_NAME:latest
 
-        - name: Generate a ASCII artwork
-          run: cowsay -f dragon "run for cover, i am a dragon......RAWR" >>dragon.txt
+ deploy:
+   needs: docker
+   runs-on: ubuntu-latest
+   steps:
+   - name: docker run 
+     run: echo docker run -d -p 8080:80 $CONTAINER_REGISTRY/${{ vars.DOCKER_USERNAME}}/$IMAGE_NAME:latest
+
+    
 
 
-
-       # - name: list file
-       #   ,rrun: ls
-
-       # - name: read files
-       #   run: cat README.md
