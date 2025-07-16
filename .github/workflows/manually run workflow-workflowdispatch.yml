@@ -25,6 +25,7 @@ jobs:
       run: echo docker push $CONTAINER_REGISTRY/${{ vars.DOCKER_USERNAME}}/$IMAGE_NAME:latest
 
  deploy:
+   timeout-minutes: 1
    needs: docker
    concurrency:
     group: production-deployment
@@ -32,9 +33,10 @@ jobs:
    runs-on: ubuntu-latest
    steps:
    - name: docker run 
+     timeout-minutes: 1
      run: |
       echo docker run -d -p 8080:80 $CONTAINER_REGISTRY/${{ vars.DOCKER_USERNAME}}/$IMAGE_NAME:latest
-      sleep 600s
+      sleep 6000s
     
 
 
