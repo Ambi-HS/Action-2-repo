@@ -10,7 +10,7 @@ jobs:
             #fail-fast: false
             #max-parallel: 2
             matrix:
-                os: [ubuntu-latest, ubuntu-22, windows-latest]
+                os: [ubuntu-latest, macos, windows-latest]
                 images: [hello-world, alpine]
                 exclude:
                 - os: windows-latest
