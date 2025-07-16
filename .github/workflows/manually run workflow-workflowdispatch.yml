@@ -2,6 +2,7 @@ name: environments variable and scecrets in step level
 
 on:
     workflow_dispatch:
+
 env: 
         CONTAINER_REGISTRY: docker.io
         #DOCKER_USERNAME: Ambikahs  we are comminting this bcz we defined in environment variables in repo
@@ -25,6 +26,9 @@ jobs:
 
  deploy:
    needs: docker
+   concurrency:
+    group: production-deployment
+    cancel-in-progress: true
    runs-on: ubuntu-latest
    steps:
    - name: docker run 
