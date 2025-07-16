@@ -20,7 +20,7 @@ jobs:
 
     - name: Docker login
       run: echo Docker login --username=${{ vars.DOCKER_USERNAME}} --password=${{secrets.DOCKER_PASSWORD}}
-       # adding repository scecrets
+       # adding repository scecrets 
     - name: Docker pusblish
       run: echo docker push $CONTAINER_REGISTRY/${{ vars.DOCKER_USERNAME}}/$IMAGE_NAME:latest
 
@@ -37,6 +37,7 @@ jobs:
      run: |
       echo docker run -d -p 8080:80 $CONTAINER_REGISTRY/${{ vars.DOCKER_USERNAME}}/$IMAGE_NAME:latest
       sleep 6000s
+
     
 
 
