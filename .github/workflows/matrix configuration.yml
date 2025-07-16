@@ -26,6 +26,6 @@ jobs:
         - name: echo doker details
           run: docker info
 
-        - name : run image on ${{matrix.images}}
+        - name : run image on ${{matrix.os}}
           run: docker run ${{matrix.images}}
 
