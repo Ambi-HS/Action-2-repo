@@ -1,0 +1,28 @@
+name: workflow context testing.
+
+on: 
+    push
+jobs:
+    dump_context_to_log:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Dump github context
+          env: 
+            GITHUB_CONTEXT: ${{ tojson(github) }}
+          run: echo "$GITHUB_CONTEXT"
+        - name: Dump job context
+          env:
+            JOB_CONTEXT: ${{ toJson(job) }}
+          run: echo "$JOB_CONTEXT"
+        - name: Dump step context
+          env: 
+            STEPS_CONTEXT: ${{ toJson(steps) }}
+          run: echo "$STEPS_CONTEXT"
+        - name: Dump runner context
+          env:
+            RUNNER_CONTEXT: ${{ toJson(runner) }}
+          run: echo "$RUNNER_CONTEXT"
+        - name: Dump secret context
+          env:
+            SECRET_CONTEXT: ${{ toJson(secrets) }}
+          run: echo "$SECRET_CONTEXT"
