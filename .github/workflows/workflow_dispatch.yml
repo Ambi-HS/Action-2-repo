@@ -1,11 +1,11 @@
-name: environments variable and scecrets in step level
+name:  workflow dispatch environments variable and scecrets in step level
 
 on:
     workflow_dispatch:
         inputs:
             logelevel:
                 description: 'loglevel'
-                required: true
+                required: false
                 default: 'warning'
                 type: choice
                 options: 
@@ -50,7 +50,7 @@ jobs:
      timeout-minutes: 1
      run: |
       echo docker run -d -p 8080:80 $CONTAINER_REGISTRY/${{ vars.DOCKER_USERNAME}}/$IMAGE_NAME:latest
-      sleep 6000s
+    # slepp 6000s
 
     
 
